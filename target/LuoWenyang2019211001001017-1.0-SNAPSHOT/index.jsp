@@ -8,7 +8,6 @@
 <h1><%= "Hello World!!!" %>
 </h1>
 <br/>
-<a href="hello-serv大润发个威风啊、
-let">Hello Servlet</a>
+<a href="hello-servlet">Hello Servlet</a>
 </body>
 </html>
