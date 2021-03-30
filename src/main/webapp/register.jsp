@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<form method="post" action="${pageContext.request.contextPath}/jdbc">
+<form method="post" action="${pageContext.request.contextPath}/register">
     username<input type="text" name="username"/><br/>
     password<input type="password" name="password"/><br/>
     Email<input type="text" name="email"/><br/>

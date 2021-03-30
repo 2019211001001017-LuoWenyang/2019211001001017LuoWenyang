@@ -12,6 +12,64 @@
         <servlet-name>anyName</servlet-name>
         <url-pattern>/hello</url-pattern><!-- url must satr with / -->
     </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>LifeCycleServlet</servlet-name><!-- give any name -->
+        <servlet-class>com.LuoWenyang.Week3.Demo.LifeCycleServlet</servlet-class><!-- package + name of servlet -->
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LifeCycleServlet</servlet-name>
+        <url-pattern>/life</url-pattern><!-- url must satr with / -->
+    </servlet-mapping>
+
+
+        <!-- <servlet>  -->
+      <!--  <servlet-name>RegisterServlet</servlet-name>  --> <!-- give any name -->
+     <!--   <servlet-class>com.LuoWenyang.Week3.Demo.RegisterServlet</servlet-class> --> <!-- package + name of servlet -->
+     <!-- </servlet> -->
+    <!--  <servlet>
+        <servlet-name>ConfigDemoServlet</servlet-name>
+        <servlet-class>com.LuoWenyang.Week4.Demo.ConfigDemoServlet</servlet-class>
+        <init-param>
+            <param-name>name</param-name>
+            <param-value>LuoWenyang</param-value>
+        </init-param>
+        <init-param>
+            <param-name>studentId</param-name>
+            <param-value>2019211001001017</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ConfigDemoServlet</servlet-name>
+        <url-pattern>/config</url-pattern>
+    </servlet-mapping>  -->
+
+
+   <!-- <servlet-mapping>
+        <servlet-name>RegisterServlet</servlet-name>
+        <url-pattern>/jdbc_week3</url-pattern> -->  <!-- url must satr with / -->
+   <!-- </servlet-mapping>  -->
     <!-- x = 5,a = x, so we can say a = 5
      so /hello == com.LuoWenyang.Week2.Demo.HelloWorldServlet-->
+
+    <context-param>
+        <param-name>driver</param-name>
+        <param-value>com.mysql.cj.jdbc.Driver</param-value>
+    </context-param>
+    <context-param>
+        <param-name>url</param-name>
+        <param-value>jdbc:mysql://localhost:3306/userdb</param-value>
+    </context-param>
+    <context-param>
+        <param-name>username</param-name>
+        <param-value>root</param-value>
+    </context-param>
+    <context-param>
+        <param-name>password</param-name>
+        <param-value>lwy5687605682</param-value>
+    </context-param>
+
+
+
 </web-app>
