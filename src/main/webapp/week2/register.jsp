@@ -31,7 +31,7 @@ NEW User Registration!!!
 </html>
 <script>
     function  loginVerify(){
-        var username = document.getElementById("username").value;
+        const username = document.getElementById("username").value;
         var password = document.getElementById("password").value;
         if(username==''){
             alert('Username cant be null!!');
