@@ -1,5 +1,6 @@
 package com.LuoWenyang.Week2.Demo;
 
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,6 +10,7 @@ import java.util.Date;
 
 // not it's just a java class
 //extend HttpServlet
+@WebServlet("/StuInfo")
 public class HelloWorldServlet extends HttpServlet {
     String name = "LuoWenyang";
     String ID = "2019211001001017";

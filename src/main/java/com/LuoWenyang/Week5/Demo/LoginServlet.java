@@ -13,19 +13,22 @@ public class LoginServlet extends HttpServlet {
     Connection con = null;
     @Override
     public void init() throws ServletException {
-        ServletContext servletContext = getServletContext();
-        String driver =  servletContext.getInitParameter("driver");
-        String url =  servletContext.getInitParameter("url");
-        String username =  servletContext.getInitParameter("username");
-        String password =  servletContext.getInitParameter("password");
-        System.out.println(driver+url+username+password);
-        try {
-            Class.forName(driver);
-            con = DriverManager.getConnection(url,username,password);
-            System.out.println("init()-->"+con);
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-        }
+//        ServletContext servletContext = getServletContext();
+//        String driver =  servletContext.getInitParameter("driver");
+//        String url =  servletContext.getInitParameter("url");
+//        String username =  servletContext.getInitParameter("username");
+//        String password =  servletContext.getInitParameter("password");
+//        System.out.println(driver+url+username+password);
+//        try {
+//            Class.forName(driver);
+//            con = DriverManager.getConnection(url,username,password);
+//            System.out.println("init()-->"+con);
+//        } catch (ClassNotFoundException | SQLException e) {
+//            e.printStackTrace();
+//        }
+
+        //only one one
+        con = (Connection) getServletContext().getAttribute("con");
     }
 
     @Override
@@ -41,15 +44,36 @@ public class LoginServlet extends HttpServlet {
         System.out.println(username+password);//check the username and password
 
         try {
-            if(LoginCheck(username,password)){
-                PrintWriter writer = response.getWriter();
-                writer.println("Login Success!!! ");
-                writer.println("Welcome:"+username);
+            String sql = "SELECT * FROM  usertable WHERE username =? and password =?";
+            ResultSet resultSet;
+            Statement stmt = con.createStatement();
+            PreparedStatement ps;
+            ps = con.prepareStatement(sql);
+            ps.setString(1, username);
+            ps.setString(2, password);
+            resultSet = ps.executeQuery();
+            //if(LoginCheck(username,password))
+            if(resultSet.next())
+            {
+//                PrintWriter writer = response.getWriter();
+//                writer.println("Login Success!!! ");
+//                writer.println("Welcome:"+username);
+                request.setAttribute("Id",resultSet.getInt("id"));
+                request.setAttribute("username",resultSet.getString("username"));
+                request.setAttribute("password",resultSet.getString("password"));
+                request.setAttribute("email",resultSet.getString("email"));
+                request.setAttribute("gender",resultSet.getString("gender"));
+                request.setAttribute("birthdate",resultSet.getString("birthdate"));
+
+                request.getRequestDispatcher("userInfo.jsp").forward(request,response);
+
 
             }else {
-                PrintWriter writer = response.getWriter();
-                writer.println("Login Fail!!! ");
-                writer.println(" Wrong Password or Wrong Username ");
+//                PrintWriter writer = response.getWriter();
+//                writer.println("Login Fail!!! ");
+//                writer.println(" Wrong Password or Wrong Username ");
+                request.setAttribute("message","Username or Password Error!!!");
+                request.getRequestDispatcher("login.jsp").forward(request,response);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -58,7 +82,8 @@ public class LoginServlet extends HttpServlet {
 
     }
 
-    private boolean LoginCheck(String username,String password) throws SQLException {
+
+    private boolean LoginCheck(String username, String password) throws SQLException {
         String sql = "SELECT * FROM  usertable WHERE username =? and password =?";
         ResultSet resultSet;
         Statement stmt = con.createStatement();
