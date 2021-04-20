@@ -23,6 +23,7 @@ public class RegisterServlet extends HttpServlet {
 
     /* week 4 code */
     Connection con = null;
+
     @Override
     public void init() throws ServletException {
         /* week 4 code */
@@ -39,12 +40,12 @@ public class RegisterServlet extends HttpServlet {
 //        } catch (ClassNotFoundException | SQLException e) {
 //            e.printStackTrace();
 //        }
-      con = (Connection) getServletContext().getAttribute("con");
+        con = (Connection) getServletContext().getAttribute("con");
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("WEB-INF/views/register.jsp").forward(request,response);
+        request.getRequestDispatcher("WEB-INF/views/register.jsp").forward(request, response);
     }
 
     @Override
@@ -89,34 +90,33 @@ public class RegisterServlet extends HttpServlet {
         //InsertUser(request);
         //Print all rows use html<table><tr><td>   -- i want to use a method
         // ResultSet resultSet = PrintAllUserInfo(response);
-       // request.setAttribute("rsname",resultSet);
-      //  request.getRequestDispatcher("userList.jsp").forward(request,response);
-       // System.out.println("i am in RegisterServlet --> doPost()--after forward()");
+        // request.setAttribute("rsname",resultSet);
+        //  request.getRequestDispatcher("userList.jsp").forward(request,response);
+        // System.out.println("i am in RegisterServlet --> doPost()--after forward()");
 
         String strHiredate = request.getParameter("birthDate");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         java.util.Date date = null;
         try {
-            date =  sdf.parse(strHiredate);
+            date = sdf.parse(strHiredate);
         } catch (ParseException e) {
             e.printStackTrace();
         }
         java.sql.Date birthDate = new java.sql.Date(date.getTime());
         // after register a new user can login
         UserDao userDao = new UserDao();
-        List<User> userList =null;
+        List<User> userList = null;
         try {
-            User user = new User(1,request.getParameter("username"),request.getParameter("password"),
-                    request.getParameter("email"),request.getParameter("gender"),birthDate);
-           boolean result = userDao.saveUser(con,user);//this mt
-           userList = userDao.findAllUser(con);
-            if(result)
-            {//success
-                request.setAttribute("userList",userList);
-                request.getRequestDispatcher("WEB-INF/views/userList.jsp").forward(request,response);
-            }else {
+            User user = new User(1, request.getParameter("username"), request.getParameter("password"),
+                    request.getParameter("email"), request.getParameter("gender"), birthDate);
+            boolean result = userDao.saveUser(con, user);//this mt
+            userList = userDao.findAllUser(con);
+            if (result) {//success
+                request.setAttribute("userList", userList);
+                request.getRequestDispatcher("WEB-INF/views/userList.jsp").forward(request, response);
+            } else {
                 //fail
-                request.getRequestDispatcher("WEB-INF/views/register.jsp").forward(request,response);
+                request.getRequestDispatcher("WEB-INF/views/register.jsp").forward(request, response);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -134,44 +134,47 @@ public class RegisterServlet extends HttpServlet {
             throwables.printStackTrace();
         }
     }
-    private void InsertUser(HttpServletRequest request)
-    {
-        String username =  request.getParameter("username");
-        String password =  request.getParameter("password");
-        String email =  request.getParameter("email");
-        String gender =  request.getParameter("gender");
-        String birthDate =  request.getParameter("birthDate");
 
-        String sql = "INSERT INTO usertable(username,password,email,gender,birthdate) VALUES (?,?,?,?,?)";
+}
 
-        int resultSet;
-        PreparedStatement ps = null;
-        try {
-            ps = con.prepareStatement(sql);
-            ps.setString(1,username);
-            ps.setString(2,password);
-            ps.setString(3,email);
-            ps.setString(4,gender);
-            ps.setString(5,birthDate);
-            resultSet = ps.executeUpdate();
-            ps.close();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }
-    private ResultSet PrintAllUserInfo(HttpServletResponse response)
-    {
-        String sql = "SELECT * FROM usertable";
-        Statement statement = null ;
-        ResultSet resultSet = null ;
-        try {
-            statement = con.createStatement();
-            resultSet = statement.executeQuery(sql);
-            return resultSet;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return null;
+//    private void InsertUser(HttpServletRequest request)
+//    {
+//        String username =  request.getParameter("username");
+//        String password =  request.getParameter("password");
+//        String email =  request.getParameter("email");
+//        String gender =  request.getParameter("gender");
+//        String birthDate =  request.getParameter("birthDate");
+//
+//        String sql = "INSERT INTO usertable(username,password,email,gender,birthdate) VALUES (?,?,?,?,?)";
+//
+//        int resultSet;
+//        PreparedStatement ps = null;
+//        try {
+//            ps = con.prepareStatement(sql);
+//            ps.setString(1,username);
+//            ps.setString(2,password);
+//            ps.setString(3,email);
+//            ps.setString(4,gender);
+//            ps.setString(5,birthDate);
+//            resultSet = ps.executeUpdate();
+//            ps.close();
+//        } catch (SQLException throwables) {
+//            throwables.printStackTrace();
+//        }
+//    }
+//    private ResultSet PrintAllUserInfo(HttpServletResponse response)
+//    {
+//        String sql = "SELECT * FROM usertable";
+//        Statement statement = null ;
+//        ResultSet resultSet = null ;
+//        try {
+//            statement = con.createStatement();
+//            resultSet = statement.executeQuery(sql);
+//            return resultSet;
+//        } catch (SQLException throwables) {
+//            throwables.printStackTrace();
+//        }
+//        return null;
 
 
 
@@ -224,5 +227,5 @@ public class RegisterServlet extends HttpServlet {
 //            writer.close();
 //        }
 
-    }
-}
+//    }
+//}
