@@ -1,6 +1,7 @@
 package com.LuoWenyang.Week3.Demo;
 
-import com.LuoWenyang.Week3.Demo.Object.User;
+import com.LuoWenyang.dao.UserDao;
+import com.LuoWenyang.model.User;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -8,6 +9,8 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,12 +44,7 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doPost(request,response);
-
-
-
-
-
+        request.getRequestDispatcher("WEB-INF/views/register.jsp").forward(request,response);
     }
 
     @Override
@@ -88,16 +86,42 @@ public class RegisterServlet extends HttpServlet {
 
         /* week 4 code */
         // add a row into database table "usertable"  -- i want to use a method
-        InsertUser(request);
+        //InsertUser(request);
         //Print all rows use html<table><tr><td>   -- i want to use a method
         // ResultSet resultSet = PrintAllUserInfo(response);
        // request.setAttribute("rsname",resultSet);
       //  request.getRequestDispatcher("userList.jsp").forward(request,response);
        // System.out.println("i am in RegisterServlet --> doPost()--after forward()");
 
-
+        String strHiredate = request.getParameter("birthDate");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date date = null;
+        try {
+            date =  sdf.parse(strHiredate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        java.sql.Date birthDate = new java.sql.Date(date.getTime());
         // after register a new user can login
-        response.sendRedirect("login.jsp");
+        UserDao userDao = new UserDao();
+        List<User> userList =null;
+        try {
+            User user = new User(1,request.getParameter("username"),request.getParameter("password"),
+                    request.getParameter("email"),request.getParameter("gender"),birthDate);
+           boolean result = userDao.saveUser(con,user);//this mt
+           userList = userDao.findAllUser(con);
+            if(result)
+            {//success
+                request.setAttribute("userList",userList);
+                request.getRequestDispatcher("WEB-INF/views/userList.jsp").forward(request,response);
+            }else {
+                //fail
+                request.getRequestDispatcher("WEB-INF/views/register.jsp").forward(request,response);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
     }
 
     /* week 4 code */
