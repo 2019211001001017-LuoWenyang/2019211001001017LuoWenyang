@@ -105,29 +105,29 @@ public class LoginServlet extends HttpServlet {
 
     }
 
-
-    private boolean LoginCheck(String username, String password) throws SQLException {
-        String sql = "SELECT * FROM  usertable WHERE username =? and password =?";
-        ResultSet resultSet;
-        Statement stmt = con.createStatement();
-        PreparedStatement ps;
-        ps = con.prepareStatement(sql);
-        ps.setString(1, username);
-        ps.setString(2, password);
-        resultSet = ps.executeQuery();
-        if(resultSet.next()){
-            resultSet.close();
-            ps.close();
-            stmt.close();
-            return true;  //success
-        }else {
-            resultSet.close();
-            ps.close();
-            stmt.close();
-            return false;  //fail
-        }
-
-
-    }
+//
+//    private boolean LoginCheck(String username, String password) throws SQLException {
+//        String sql = "SELECT * FROM  usertable WHERE username =? and password =?";
+//        ResultSet resultSet;
+//        Statement stmt = con.createStatement();
+//        PreparedStatement ps;
+//        ps = con.prepareStatement(sql);
+//        ps.setString(1, username);
+//        ps.setString(2, password);
+//        resultSet = ps.executeQuery();
+//        if(resultSet.next()){
+//            resultSet.close();
+//            ps.close();
+//            stmt.close();
+//            return true;  //success
+//        }else {
+//            resultSet.close();
+//            ps.close();
+//            stmt.close();
+//            return false;  //fail
+//        }
+//
+//
+//    }
 
 }
