@@ -70,6 +70,9 @@
         <param-value>lwy5687605682</param-value>
     </context-param>
 
+    <welcome-file-list>
+        <welcome-file>home</welcome-file> <!-- when you run app - first request send to home... homeServlet-->
+    </welcome-file-list>
 
 
 </web-app>
