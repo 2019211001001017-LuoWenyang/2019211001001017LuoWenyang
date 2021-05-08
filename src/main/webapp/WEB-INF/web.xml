@@ -10,7 +10,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>anyName</servlet-name>
-        <url-pattern>/hello</url-pattern><!-- url must satr with / -->
+        <url-pattern>/hello1</url-pattern><!-- url must satr with / -->
     </servlet-mapping>
 
 
@@ -73,6 +73,40 @@
     <welcome-file-list>
         <welcome-file>home</welcome-file> <!-- when you run app - first request send to home... homeServlet-->
     </welcome-file-list>
+
+
+
+    <!-- chain of filter -->
+    <!-- 1st -->
+
+
+    <filter>
+        <filter-name>HelloServlet</filter-name>
+        <filter-class>com.LuoWenyang.filter.HelloFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>HelloFilter</filter-name>
+        <url-pattern>/hello</url-pattern> <!--  url of HelloServlet -this is only for  -->
+    </filter-mapping>
+    <!-- 2nd -->
+    <filter>
+        <filter-name>loggerFilter</filter-name>
+        <filter-class>com.LuoWenyang.filter.LoggerFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>loggerFilter</filter-name>
+        <url-pattern>/hello</url-pattern>
+    </filter-mapping>
+
+    <!-- 3rd one -->
+    <filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>com.LuoWenyang.filter.AuthFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>/hello</url-pattern>
+    </filter-mapping>
 
 
 </web-app>

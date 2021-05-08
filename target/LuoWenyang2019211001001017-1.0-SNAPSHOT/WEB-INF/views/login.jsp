@@ -1,62 +1,50 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: mac
-  Date: 2021/4/4
-  Time: 11:12 上午
-  To change this template use File | Settings | File Templates.
---%>
+
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="header.jsp"%>
-<h1> Login </h1>
-<%
+<section id="form"><!--form-->
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-4 col-sm-offset-1">
+					<div class="login-form"><!--login form-->
+					<h2>Login to your account</h2>	<%
     if(!(request.getAttribute("message")==null)){
-        //error
-        out.println(request.getAttribute("message"));
-    }
-%>
+    out.println("<h2>"+request.getAttribute("message")+"</h2>");
+}%>
 <%
-    // read cookies
-   Cookie[] allCookies = request.getCookies();//give all cookies
-    String username="",password="",rememberMeValue="";
-    if(allCookies!=null){
-        //we read 3 cookies
-        for(Cookie cookie:allCookies){
-            //get one by one
-            if(cookie.getName().equals("cUsername")){
-                username = cookie.getValue(); // get values of this cookies
+    Cookie[] cookies=request.getCookies();
+    String username="";
+    String password="";
+    String rememberMe="";
+    if (cookies!=null){
+        for (Cookie cookie:cookies){
+            if (cookie.getName().equals("cUsername")){
+                username=cookie.getValue();
             }
-            if(cookie.getName().equals("cPassword")){
-                password = cookie.getValue(); // get values of this cookies
+            if (cookie.getName().equals("cPassword")){
+                password=cookie.getValue();
             }
-            if(cookie.getName().equals("cRememberMe")){
-                rememberMeValue = cookie.getValue(); // get values of this cookies
+            if (cookie.getName().equals("cRememberMe")){
+                rememberMe=cookie.getValue();
             }
         }
     }
-
+    //update 5 user basepath
 %>
-<form method="post" id="form" action="login">
 
-    Username:<input type="text" id="username" name="username"  placeholder="Username" value="<%=username %>"/><br/>
-    Password:<input type="password"  id="password" name="password"  placeholder="Password" <%=password %>/><br/>
-    <input type="checkbox" name="rememberMe" value="1" <%=rememberMeValue.equals("1")? "checked":"" %> />RememberMe<br/>
-    <button type="button" onclick="loginVerify()" name="LoginButton">Login</button>
-
-</form>
-<script>
-    function  loginVerify(){
-        const username = document.getElementById("username").value;
-        const password = document.getElementById("password").value;
-        if(username===''){
-            alert('Username cant be null!!');
-            return;
-        }
-        if(password===''){
-            alert('Password cant be null!!!!');
-            return;
-        }
-        //调用后端servlet进行数据传输！
-        document.getElementById("form").submit();
-    }
-</script>
+<form method="post" action="<%=request.getContextPath()+"/login"%>">
+    <input type="text" name="username" placeholder="Username" value="<%=username%>"><br>
+   <input type="password" name="password" placeholder="password" value="<%=password%>">
+    <br/>
+    <span>
+		<input type="checkbox" class="checkbox" name="remember" value="1" <%="1".equals(rememberMe)? "checked":""%>/> Keep me signed in
+   </span>
+    <button type="submit" class="btn btn-default">Login</button>
+</form>	
+					</div><!--/login form-->
+				</div>
+				
+				
+			</div>
+		</div>
+	</section><!--/form-->
 <%@include file="footer.jsp"%>
-

@@ -94,7 +94,7 @@ public class RegisterServlet extends HttpServlet {
         //  request.getRequestDispatcher("userList.jsp").forward(request,response);
         // System.out.println("i am in RegisterServlet --> doPost()--after forward()");
 
-        String strHiredate = request.getParameter("birthDate");
+        String strHiredate = request.getParameter("birthdate");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         java.util.Date date = null;
         try {
@@ -113,7 +113,9 @@ public class RegisterServlet extends HttpServlet {
             userList = userDao.findAllUser(con);
             if (result) {//success
                 request.setAttribute("userList", userList);
-                request.getRequestDispatcher("WEB-INF/views/userList.jsp").forward(request, response);
+              //  request.getRequestDispatcher("WEB-INF/views/userList.jsp").forward(request, response);
+                // week 9
+                response.sendRedirect("login");
             } else {
                 //fail
                 request.getRequestDispatcher("WEB-INF/views/register.jsp").forward(request, response);
