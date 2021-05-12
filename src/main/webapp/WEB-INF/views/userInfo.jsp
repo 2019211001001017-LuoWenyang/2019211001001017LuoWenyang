@@ -1,4 +1,4 @@
-<%@ page import="com.LuoWenyang.model.User" %><%--
+<%@ page import="com.LuoWenyang.model.User" %>
  <%--
   Created by IntelliJ IDEA.
   User: mac
