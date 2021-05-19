@@ -53,13 +53,17 @@ public class UpdateUserServlet extends HttpServlet {
         //4.create an Object UserDao
         UserDao userDao = new UserDao();
         //5. call updateUser() in UserDao
+        Connection con = (Connection) getServletContext().getAttribute("con");
         try {
-            userDao.updateUser(con,user);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            if(userDao.updateUser(con,user)!=0) {
+                User user1=userDao.findByUsernamePassword(con,username,password);
+                HttpSession session=request.getSession();
+                session.setMaxInactiveInterval(10);
+                session.setAttribute("user",user1);
+                request.getRequestDispatcher("WEB-IN/views/userInfo.jsp").forward(request, response);
+            }
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
         }
-        //:forward to WEB-INF/views/userInfo.jsp
-        request.getRequestDispatcher("WEB-INF/views/userInfo.jsp").forward(request,response);
-
-    }
+}
 }
