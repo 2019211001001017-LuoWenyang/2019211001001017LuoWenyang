@@ -39,6 +39,7 @@ public class AddProductServlet extends HttpServlet {
         String productName = request.getParameter("productName");
         double price = request.getParameter("price")!=null ? Double.parseDouble(request.getParameter("price")) : 0.0;//
         int categoryId = request.getParameter("categoryId")!=null ? Integer.parseInt(request.getParameter("categoryId")) : 8;//
+        System.out.println(categoryId);
         String productDescription = request.getParameter("productDescription");
 
         //get picture
@@ -59,7 +60,8 @@ public class AddProductServlet extends HttpServlet {
         int i = 0;
         try {
             i = productDao.save(product,con);
-            if(i>1) {
+            if(i>0) {
+
                 response.sendRedirect("productList");
             }
         }catch (SQLException throwables){
