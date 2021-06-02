@@ -3,6 +3,7 @@ package com.LuoWenyang.dao;
 import com.LuoWenyang.model.Product;
 
 
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +47,7 @@ public class ProductDao implements  IProductDao{
         ps = con.prepareStatement(sql);
         ps.setString(1, instance.getProductName());
         ps.setString(2, instance.getProductDescription());
-        ps.setBinaryStream(3, instance.getPicture());
+        ps.setBlob(3, instance.getPicture());
         ps.setDouble(4, instance.getPrice());
         ps.setInt(5,instance.getCategoryId());
         ps.setInt(6, instance.getProductId());
@@ -67,7 +68,7 @@ public class ProductDao implements  IProductDao{
             product.setProductId(productId);
             product.setProductName(resultSet.getString("productName"));
             product.setProductDescription(resultSet.getString("productDescription"));
-            product.setPicture(resultSet.getBinaryStream("picture"));
+            product.setPicture((InputStream) resultSet.getBlob("picture"));
             product.setCategoryId(resultSet.getInt("categoryId"));
             product.setPrice(resultSet.getDouble("price"));
         }
@@ -89,7 +90,7 @@ public class ProductDao implements  IProductDao{
             product.setProductId(resultSet.getInt("productId"));
             product.setProductName(resultSet.getString("productName"));
             product.setProductDescription(resultSet.getString("productDescription"));
-            product.setPicture(resultSet.getBinaryStream("picture"));
+            product.setPicture((InputStream) resultSet.getBlob("picture"));
             product.setCategoryId(resultSet.getInt("categoryId"));
             product.setPrice(resultSet.getDouble("price"));
             productList.add(product);
@@ -113,7 +114,7 @@ public class ProductDao implements  IProductDao{
             product.setProductId(resultSet.getInt("productId"));
             product.setProductName(resultSet.getString("productName"));
             product.setProductDescription(resultSet.getString("productDescription"));
-            product.setPicture(resultSet.getBinaryStream("picture"));
+            product.setPicture((InputStream) resultSet.getBlob("picture"));
             product.setCategoryId(resultSet.getInt("categoryId"));
             product.setPrice(resultSet.getDouble("price"));
             productList.add(product);
@@ -135,7 +136,7 @@ public class ProductDao implements  IProductDao{
             product.setProductId(resultSet.getInt("productId"));
             product.setProductName(resultSet.getString("productName"));
             product.setProductDescription(resultSet.getString("productDescription"));
-            product.setPicture(resultSet.getBinaryStream("picture"));
+            product.setPicture((InputStream) resultSet.getBlob("picture"));
             product.setCategoryId(resultSet.getInt("categoryId"));
             product.setPrice(resultSet.getDouble("price"));
             productList.add(product);
@@ -158,7 +159,7 @@ public class ProductDao implements  IProductDao{
             product.setProductId(resultSet.getInt("productId"));
             product.setProductName(resultSet.getString("productName"));
             product.setProductDescription(resultSet.getString("productDescription"));
-            product.setPicture(resultSet.getBinaryStream("picture"));
+            product.setPicture((InputStream) resultSet.getBlob("picture"));
             product.setCategoryId(resultSet.getInt("categoryId"));
             product.setPrice(resultSet.getDouble("price"));
             productList.add(product);
@@ -181,7 +182,7 @@ public class ProductDao implements  IProductDao{
             product.setProductId(resultSet.getInt("productId"));
             product.setProductName(resultSet.getString("productName"));
             product.setProductDescription(resultSet.getString("productDescription"));
-            product.setPicture(resultSet.getBinaryStream("picture"));
+            product.setPicture((InputStream) resultSet.getBlob("picture"));
             product.setCategoryId(resultSet.getInt("categoryId"));
             product.setPrice(resultSet.getDouble("price"));// why getPicture by id return a list?
             productList.add(product);
