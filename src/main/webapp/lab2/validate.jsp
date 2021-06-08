@@ -20,7 +20,7 @@
 <%
    //todo 3: use if check username is admin and ppassword is admin
     if( user.getUsername().equals("admin") && user.getPassword().equals("admin")){
-//    if(request.getParameter("username").equals("admin") && request.getParameter("password").equals("admin")){
+
 %>
     <%--todo 4: use jsp:forward to welcome.jsp page--%>
 <jsp:forward page="welcome.jsp"/>
