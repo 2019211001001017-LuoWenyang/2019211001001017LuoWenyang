@@ -1,4 +1,4 @@
-package com.LuoWenyang.lab1;
+package com.lab1;
 
 public class Dog {
      private String name ;
