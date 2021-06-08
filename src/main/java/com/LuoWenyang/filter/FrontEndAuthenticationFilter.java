@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter("/*")
+//@WebFilter("/*")
 public class FrontEndAuthenticationFilter implements Filter {
     private HttpServletRequest httpServletRequest;
     private static final String[] loginRequiredURLs ={

@@ -1,6 +1,6 @@
 package com.LuoWenyang.controller;
 
-import com.LuoWenyang.Week6.Demo.JDBCServletContextListener;
+
 import com.LuoWenyang.dao.UserDao;
 import com.LuoWenyang.model.User;
 
@@ -60,7 +60,7 @@ public class UpdateUserServlet extends HttpServlet {
                 HttpSession session=request.getSession();
                 session.setMaxInactiveInterval(10);
                 session.setAttribute("user",user1);
-                request.getRequestDispatcher("WEB-IN/views/userInfo.jsp").forward(request, response);
+                request.getRequestDispatcher("accountDetails").forward(request, response);
             }
         } catch (SQLException throwable) {
             throwable.printStackTrace();
