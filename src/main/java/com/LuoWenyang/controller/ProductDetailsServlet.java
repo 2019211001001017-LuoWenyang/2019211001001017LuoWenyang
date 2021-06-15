@@ -38,6 +38,7 @@ public class ProductDetailsServlet extends HttpServlet {
                     int productId = Integer.parseInt(request.getParameter("id"));
                     ProductDao productDao = new ProductDao();
                     Product product = productDao.findById(productId, con);
+                    request.setAttribute("p",product);
                 }
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
@@ -49,6 +50,6 @@ public class ProductDetailsServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+                doGet(request,response);
     }
 }

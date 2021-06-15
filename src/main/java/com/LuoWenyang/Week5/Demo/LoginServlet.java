@@ -63,9 +63,9 @@ public class LoginServlet extends HttpServlet {
                     Cookie rememberMeCookie = new Cookie("cRememberMe",rememberMe);
 
                     //set age of cookies
-                    usernameCookie.setMaxAge(5);//5 sec - test ---15days =  60*60*24*15
-                    passwordCookie.setMaxAge(5);
-                    rememberMeCookie.setMaxAge(5);
+                    usernameCookie.setMaxAge(50);//5 sec - test ---15days =  60*60*24*15
+                    passwordCookie.setMaxAge(50);
+                    rememberMeCookie.setMaxAge(50);
                     //add 3 cookies into response
                     response.addCookie(usernameCookie);
                     response.addCookie(passwordCookie);
@@ -87,13 +87,13 @@ public class LoginServlet extends HttpServlet {
                 //check session id
                 System.out.println("session id-->"+session.getId());//session id
                 //set time for session
-                session.setMaxInactiveInterval(10);//for 5 10 section if request not come in -tomcat kill session -set 60*60 == 1h
+                session.setMaxInactiveInterval(60);//for 5 10 section if request not come in -tomcat kill session -set 60*60 == 1h
 
                 //week 8 0--change request to session - so we can get session attribute in many jsp age--login.jsp and header.jsp
                 session.setAttribute("user",user);
 
                 //request.setAttribute("user",user);
-                request.getRequestDispatcher("WEB-INF/views/userInfo.jsp").forward(request,response);
+                request.getRequestDispatcher("WEB-INF/views/index.jsp").forward(request,response);
             }else {
                 //invalid
                 request.setAttribute("message","Username or Password Error!!!");

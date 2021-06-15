@@ -1,5 +1,6 @@
-
-	<%@include file="header.jsp" %>
+<%@ page import="com.LuoWenyang.model.Product" %>
+<%@ page import="com.LuoWenyang.dao.ProductDao" %>
+<%@include file="header.jsp" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 	<section>
 		<div class="container">
@@ -35,12 +36,13 @@
 						
 					</div>
 				</div>
-				
+
+
 				<div class="col-sm-9 padding-right">
 					<div class="product-details"><!--product-details-->
 						<div class="col-sm-5">
 							<div class="view-product">
-								<img src="<%=basePath %>getImg?id=${p.productId}" alt="" />
+								<img src="<%=basePath %>getImg?id=${param.id}" alt="" />
 							</div>
 							<div id="similar-product" class="carousel slide" data-ride="carousel">
 								

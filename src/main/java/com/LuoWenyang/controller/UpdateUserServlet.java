@@ -25,7 +25,7 @@ public class UpdateUserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
           // write code
         // forward to WEB-INF/views/updateUser.jsp
-        request.getRequestDispatcher("WEB-INF/views/updateUser.jsp").forward(request,response);
+        request.getRequestDispatcher("WEB-INF/views/updateUserView.jsp").forward(request,response);
 
     }
 
@@ -39,7 +39,7 @@ public class UpdateUserServlet extends HttpServlet {
         String password =  request.getParameter("password");
         String email =     request.getParameter("email");
         String gender =    request.getParameter("gender");
-        Date birthDate = Date.valueOf(request.getParameter("birthDate"));
+        Date birthDate = Date.valueOf(request.getParameter("birthdate"));
 
         //2. create an object of User Model
         User user = new User();

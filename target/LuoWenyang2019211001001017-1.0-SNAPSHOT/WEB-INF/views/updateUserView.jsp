@@ -1,6 +1,6 @@
 <%@ page import="com.LuoWenyang.model.User" %>
 <%@ page import="java.util.List" %>
- 
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="header.jsp"%>
 <section id="form"><!--form-->
@@ -9,9 +9,9 @@
 				<div class="col-sm-4 col-sm-offset-1">
 					<div class="login-form"><!--login form-->
 						<h2>Update User Info</h2>
-<% if(!(request.getAttribute("user")==null)){
+<% if(!(session.getAttribute("user")==null)){
     
-   com.LuoWenyang.model.User u = (com.LuoWenyang.model.User)request.getAttribute("user");
+   com.LuoWenyang.model.User u = (com.LuoWenyang.model.User)session.getAttribute("user");
 %>
 <%if(!(request.getAttribute("message")==null)){
     out.println("<h3>"+request.getAttribute("message")+"</h3>");
